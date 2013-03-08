@@ -1,4 +1,7 @@
 Lunchkeeper::Application.routes.draw do
+  resources :keepers
+
+
   resources :entries
 
 

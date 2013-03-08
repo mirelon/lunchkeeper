@@ -1,0 +1,13 @@
+- model_class = Keeper
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+
+%p
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
+  = @keeper.name
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), keepers_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_keeper_path(@keeper), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), keeper_path(@keeper), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308095340) do
+ActiveRecord::Schema.define(:version => 20130308103540) do
 
   create_table "entries", :force => true do |t|
     t.integer  "count"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(:version => 20130308095340) do
     t.boolean  "preselected"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "keepers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -35,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130308095340) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
