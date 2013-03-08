@@ -1,4 +1,5 @@
 class KeepersController < ApplicationController
+  before_filter :authenticate_user!
   # GET /keepers
   # GET /keepers.json
   def index

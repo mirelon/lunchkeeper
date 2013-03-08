@@ -2,7 +2,7 @@ Lunchkeeper::Application.routes.draw do
   resources :keepers
   resources :entries
 
-  devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
+  devise_for :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -53,7 +53,7 @@ Lunchkeeper::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'keepers#index'
 
   # See how all your routes lay out with "rake routes"
 
