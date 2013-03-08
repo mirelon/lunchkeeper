@@ -12,9 +12,10 @@
     - @keepers.each do |keeper|
       %tr
         %td= keeper.id
-        %td= link_to keeper.name, keeper_entries_path(keeper)
+        %td= keeper.name
         %td=l keeper.created_at
         %td
+          = link_to t('.entries', :default => t("helpers.links.entries")), keeper_entries_path(keeper), :class => 'btn btn-mini btn-info'
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_keeper_path(keeper), :class => 'btn btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), keeper_path(keeper), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
