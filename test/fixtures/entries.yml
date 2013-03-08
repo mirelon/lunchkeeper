@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  count: 1
+  code: MyString
+  description: MyString
+  preselected: false
+
+two:
+  count: 1
+  code: MyString
+  description: MyString
+  preselected: false
