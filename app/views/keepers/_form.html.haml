@@ -5,5 +5,6 @@
       = f.text_field :name, :class => 'text_field'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.entries', :default => t("helpers.links.entries")), keeper_entries_path(@keeper), :class => 'btn btn-info'
+    - if @keeper.id.present?
+      = link_to t('.entries', :default => t("helpers.links.entries")), keeper_entries_path(@keeper), :class => 'btn btn-info'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), keepers_path, :class => 'btn'

@@ -22,10 +22,10 @@ class EntriesController < ApplicationController
   # GET /keepers/1/entries.json
   def index
     if params[:preselected]
-      @entries = Entry.preselected
+      @entries = @keeper.entries.where(preselected: true)
     else
-      @entries = Entry.where(preselected: false).order("created_at DESC")
-      @preselected = Entry.preselected
+      @entries = @keeper.entries.where(preselected: false).order("created_at DESC")
+      @preselected = @keeper.entries.where(preselected: true)
     end
     init_relevant_fields
     respond_to do |format|
@@ -72,9 +72,11 @@ class EntriesController < ApplicationController
       @entry = Entry.new()
     end
     @entry.assign_attributes params[:entry]
+    @entry.keeper = @keeper
 
     respond_to do |format|
       if @entry.save
+        @was_preselected = @entry.preselected
         format.html { redirect_to listing_path, notice: "Entry was successfully created." }
         format.json { render json: {location: listing_path}}
       else
