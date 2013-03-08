@@ -25,3 +25,8 @@
           = link_to t('.destroy', :default => t("helpers.links.destroy")), keeper_entry_path(@keeper, entry), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new")), new_keeper_entry_path, :class => 'btn btn-primary'
+%br
+Quick add:
+- @preselected.each do |preselected|
+  = button_tag preselected.to_caption, class: 'btn btn-success quick-add-button', preselected_id: preselected.id, href: "/keepers/" + @keeper.id.to_s + "/entries"
+  

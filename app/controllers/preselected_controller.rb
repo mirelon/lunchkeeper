@@ -5,7 +5,7 @@ class PreselectedController < EntriesController
   # GET /keepers/1/preselected
   # GET /keepers/1/preselected.json
   def index
-    @entries = Entry.where(preselected: true)
+    @entries = Entry.preselected
 
     respond_to do |format|
       format.html # index.html.erb

@@ -10,7 +10,8 @@ class EntriesController < ApplicationController
   # GET /keepers/1/entries
   # GET /keepers///entries.json
   def index
-    @entries = Entry.where(preselected: false)
+    @entries = Entry.where(preselected: false).order("created_at DESC")
+    @preselected = Entry.preselected
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,12 +49,19 @@ class EntriesController < ApplicationController
   # POST /keepers/1/entries
   # POST /keepers/1/entries.json
   def create
-    @entry = Entry.new(params[:entry])
+    if params[:preselected_id]
+      @preselected = Entry.find params[:preselected_id]
+      @entry = @preselected.dup
+      @entry.preselected = false
+    else
+      @entry = Entry.new()
+    end
+    @entry.assign_attributes params[:entry]
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to keeper_entries_path @keeper, notice: 'Entry was successfully created.' }
-        format.json { render json: @entry, status: :created, location: @entry }
+        format.html { redirect_to keeper_entries_path @keeper, notice: "Entry was successfully created." }
+        format.json { render json: {location: keeper_entries_path(@keeper)}}
       else
         format.html { render action: "new" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
