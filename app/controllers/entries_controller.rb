@@ -1,25 +1,33 @@
 class EntriesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_keeper
+  before_filter :init_keeper
 
-  def load_keeper
+  def init_keeper
     @keeper = Keeper.find(params[:keeper_id])
   end
 
-
-  # GET /keepers/1/entries
-  # GET /keepers/1/entries.json
-  def index
-    @entries = Entry.where(preselected: false).order("created_at DESC")
-    @preselected = Entry.preselected
-
+  def init_relevant_fields
     @relevant_fields = {count: false, code: false, description: false}
     @entries.each do |entry|
       @relevant_fields.each do |field, value|
         @relevant_fields[field] |= entry[field].present?
       end
     end
+    if @relevant_fields == {count: false, code: false, description: false}
+      @relevant_fields = {count: true, code: true, description: true}
+    end
+  end
 
+  # GET /keepers/1/entries
+  # GET /keepers/1/entries.json
+  def index
+    if params[:preselected]
+      @entries = Entry.preselected
+    else
+      @entries = Entry.where(preselected: false).order("created_at DESC")
+      @preselected = Entry.preselected
+    end
+    init_relevant_fields
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @entries }
@@ -67,8 +75,8 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to keeper_entries_path @keeper, notice: "Entry was successfully created." }
-        format.json { render json: {location: keeper_entries_path(@keeper)}}
+        format.html { redirect_to listing_path, notice: "Entry was successfully created." }
+        format.json { render json: {location: listing_path}}
       else
         format.html { render action: "new" }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
@@ -83,7 +91,8 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
-        format.html { redirect_to [@keeper, @entry], notice: 'Entry was successfully updated.' }
+        @was_preselected = @entry.preselected
+        format.html { redirect_to listing_path, notice: 'Entry was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -96,11 +105,25 @@ class EntriesController < ApplicationController
   # DELETE /keepers/1/entries/1.json
   def destroy
     @entry = Entry.find(params[:id])
+    @was_preselected = @entry.preselected
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to keeper_entries_url }
+      format.html { redirect_to listing_path, notice: 'Entry was successfully deleted.' }
       format.json { head :no_content }
     end
   end
+
+  def redirect_to_listing
+    redirect_to listing_path
+  end
+
+  def listing_path
+    if params[:preselected] or @was_preselected
+      keeper_preselected_path
+    else
+      keeper_entries_path
+    end
+  end
+
 end
