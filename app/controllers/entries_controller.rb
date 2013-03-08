@@ -8,10 +8,17 @@ class EntriesController < ApplicationController
 
 
   # GET /keepers/1/entries
-  # GET /keepers///entries.json
+  # GET /keepers/1/entries.json
   def index
     @entries = Entry.where(preselected: false).order("created_at DESC")
     @preselected = Entry.preselected
+
+    @relevant_fields = {count: false, code: false, description: false}
+    @entries.each do |entry|
+      @relevant_fields.each do |field, value|
+        @relevant_fields[field] |= entry[field].present?
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb
