@@ -2,6 +2,7 @@ Lunchkeeper::Application.routes.draw do
 
   resources :keepers do
     resources :entries
+    get 'preselected' => 'preselected#index'
   end
 
   devise_for :users
