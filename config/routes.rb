@@ -1,6 +1,8 @@
 Lunchkeeper::Application.routes.draw do
-  resources :keepers
-  resources :entries
+
+  resources :keepers do
+    resources :entries
+  end
 
   devise_for :users
 

@@ -11,8 +11,8 @@
   %tbody
     - @keepers.each do |keeper|
       %tr
-        %td= link_to keeper.id, keeper_path(keeper)
-        %td= keeper.name
+        %td= keeper.id
+        %td= link_to keeper.name, keeper_entries_path(keeper)
         %td=l keeper.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_keeper_path(keeper), :class => 'btn btn-mini'

@@ -1,4 +1,4 @@
-= form_for @entry, :html => { :class => 'form-horizontal' } do |f|
+= form_for [@keeper, @entry], :html => { :class => 'form-horizontal' } do |f|
   .control-group
     = f.label :count, :class => 'control-label'
     .controls
@@ -17,4 +17,4 @@
       = f.check_box :preselected, :class => 'check_box'
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), entries_path, :class => 'btn'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), keeper_entries_path, :class => 'btn'

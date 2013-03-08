@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308123909) do
+ActiveRecord::Schema.define(:version => 20130308124505) do
 
   create_table "entries", :force => true do |t|
     t.integer  "count"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130308123909) do
     t.boolean  "preselected"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "keeper_id"
   end
 
   create_table "keepers", :force => true do |t|
