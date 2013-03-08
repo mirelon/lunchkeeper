@@ -3,7 +3,7 @@ class KeepersController < ApplicationController
   # GET /keepers
   # GET /keepers.json
   def index
-    @keepers = Keeper.all
+    @keepers = current_user.keepers
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +42,7 @@ class KeepersController < ApplicationController
   # POST /keepers.json
   def create
     @keeper = Keeper.new(params[:keeper])
+    @keeper.user = current_user
 
     respond_to do |format|
       if @keeper.save
