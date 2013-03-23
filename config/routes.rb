@@ -3,6 +3,7 @@ Lunchkeeper::Application.routes.draw do
   resources :keepers do
     resources :entries
     get 'preselected', :to => "entries#index", :preselected => true, :as => "preselected"
+    get 'graphs', :to => "keepers#graphs"
   end
 
   devise_for :users

@@ -2,6 +2,7 @@
 %html
   %head
     %title Lunchkeeper
+    = include_gon
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -16,8 +17,8 @@
           .nav-collapse
             %ul.nav
               %li= link_to "Keepers", keepers_path
-              %li= link_to "Graphs"
               - if @keeper.present? and @keeper.id.present?
+                %li= link_to "Graphs", keeper_graphs_path(@keeper)
                 %li= link_to "Preselected Values", keeper_preselected_path(@keeper)
               
               - if user_signed_in?

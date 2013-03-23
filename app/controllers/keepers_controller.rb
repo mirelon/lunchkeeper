@@ -82,4 +82,16 @@ class KeepersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def graphs
+    keeper = Keeper.find(params[:keeper_id])
+    entries = keeper.entries.where(preselected: false).order("created_at ASC")
+
+    gon.data = [ { x: keeper.entries_from.to_i * 1000 - 86400000, y: 0 } ]
+
+    entries.each do |e|
+      gon.data << { x: e.created_at.to_i * 1000, y: gon.data.last[:y] + e.count }
+    end
+  end
+
 end
