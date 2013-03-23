@@ -7,8 +7,21 @@ $ ->
         type: "spline"
         zoomType: "x"
 
+      title:
+        text: gon.title
+
       xAxis:
         type: "datetime"
+
+      yAxis:
+        startOnTick: false,
+        title:
+          text: "Cumulative count"
+
+      plotOptions:
+        spline:
+          marker:
+            enabled: false
 
       series:
         [

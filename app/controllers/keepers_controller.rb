@@ -92,6 +92,8 @@ class KeepersController < ApplicationController
     entries.each do |e|
       gon.data << { x: e.date.to_i * 1000, y: gon.data.last[:y] + e.count }
     end
+
+    gon.title = keeper.name
   end
 
 end
