@@ -10,4 +10,8 @@ class Entry < ActiveRecord::Base
     [count, code, description].join " "
   end
 
+  def preselected?
+    preselected
+  end
+
 end
