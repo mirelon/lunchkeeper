@@ -12,6 +12,10 @@
     .controls
       = f.text_field :description, :class => 'text_field'
   .control-group
+    = f.label :date, :class => 'control-label'
+    .controls
+      = f.text_field :date, :class => 'date_field'
+  .control-group
     = f.label :preselected, :class => 'control-label'
     .controls
       = f.check_box :preselected, :class => 'check_box'
