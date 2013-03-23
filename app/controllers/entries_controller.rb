@@ -24,7 +24,7 @@ class EntriesController < ApplicationController
     if params[:preselected]
       @entries = @keeper.entries.where(preselected: true)
     else
-      @entries = @keeper.entries.where(preselected: false).order("created_at DESC")
+      @entries = @keeper.entries.where(preselected: false).order("date DESC")
       @preselected = @keeper.entries.where(preselected: true)
     end
     init_relevant_fields
@@ -68,6 +68,7 @@ class EntriesController < ApplicationController
       @preselected = Entry.find params[:preselected_id]
       @entry = @preselected.dup
       @entry.preselected = false
+      @entry.date = Date.current
     else
       @entry = Entry.new()
     end

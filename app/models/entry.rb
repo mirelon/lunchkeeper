@@ -1,6 +1,6 @@
 class Entry < ActiveRecord::Base
   belongs_to :keeper
-  attr_accessible :code, :count, :description, :preselected
+  attr_accessible :code, :count, :description, :preselected, :date
 
   def self.preselected
     where(preselected: true)
