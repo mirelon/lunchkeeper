@@ -1,6 +1,7 @@
 -if @preselected.present?
   %br
   %br
-  Quick add:
+  = @keeper.name
+  quick add:
   - @preselected.each do |preselected|
     = button_tag preselected.to_caption, class: 'btn btn-success quick-add-button', preselected_id: preselected.id, href: "/keepers/" + @keeper.id.to_s + "/entries"

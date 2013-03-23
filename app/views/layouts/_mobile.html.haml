@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    %title Lunchkeeper
+    = include_gon
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{data_toggle: "collapse", data_target: ".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .nav-collapse
+            %ul.nav
+              %li= link_to "Keepers", keepers_path
+              - if @keeper.present? and @keeper.id.present?
+                %li= link_to "Graphs", keeper_graphs_path(@keeper)
+                %li= link_to "Preselected Values", keeper_preselected_path(@keeper)
+              
+              - if user_signed_in?
+                %li= link_to "Logout (" + current_user.email + ")", destroy_user_session_path, method: :delete
+    .container= yield

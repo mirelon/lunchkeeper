@@ -117,6 +117,11 @@ class EntriesController < ApplicationController
     end
   end
 
+  def quick_add
+    @preselected = @keeper.entries.where(preselected: true)
+    render partial: "entries/quick_add", layout: "layouts/mobile"
+  end
+
   def redirect_to_listing
     redirect_to listing_path
   end
