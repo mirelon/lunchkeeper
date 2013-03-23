@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20130323031224) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "keeper_id"
-    t.date     "date"
+    t.datetime "date"
   end
 
   create_table "keepers", :force => true do |t|
