@@ -68,7 +68,7 @@ class EntriesController < ApplicationController
       @preselected = Entry.find params[:preselected_id]
       @entry = @preselected.dup
       @entry.preselected = false
-      @entry.date = Date.current
+      @entry.date = DateTime.current
     else
       @entry = Entry.new()
     end
