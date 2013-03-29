@@ -1,9 +1,9 @@
 $ ->
-  if gon?
+  if gon? and $('#highchart-container-cumulative').length>0
     console.log gon.data
-    chart = new Highcharts.Chart
+    pie_chart = new Highcharts.Chart
       chart:
-        renderTo: "highchart-container"
+        renderTo: "highchart-container-cumulative"
         type: "spline"
         zoomType: "x"
 

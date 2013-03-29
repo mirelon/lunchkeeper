@@ -3,7 +3,9 @@ Lunchkeeper::Application.routes.draw do
   resources :keepers do
     resources :entries
     get 'preselected', :to => "entries#index", :preselected => true, :as => "preselected"
-    get 'graphs', :to => "keepers#graphs"
+    get 'graphs', :to => "graphs#index"
+    get 'graph/cumulative', :to => "graphs#cumulative", :graph_type => 'cumulative', :as => "cumulative_graph"
+    get 'graph/pie', :to => "graphs#pie", :graph_type => 'pie', :as => "pie_chart"
     get 'quick_add', :to => "entries#quick_add"
   end
 
