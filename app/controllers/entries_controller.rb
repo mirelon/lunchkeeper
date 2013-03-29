@@ -74,6 +74,7 @@ class EntriesController < ApplicationController
     end
     @entry.assign_attributes params[:entry]
     @entry.keeper = @keeper
+    @entry.date ||= DateTime.current
 
     respond_to do |format|
       if @entry.save
