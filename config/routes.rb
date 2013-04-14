@@ -1,8 +1,5 @@
 Lunchkeeper::Application.routes.draw do
 
-  get "obedovat/show_menu"
-
-  get "obedovat/eat"
 
   resources :keepers do
     resources :entries
@@ -11,6 +8,9 @@ Lunchkeeper::Application.routes.draw do
     get 'graph/cumulative', :to => "graphs#cumulative", :graph_type => 'cumulative', :as => "cumulative_graph"
     get 'graph/pie', :to => "graphs#pie", :graph_type => 'pie', :as => "pie_chart"
     get 'quick_add', :to => "entries#quick_add"
+
+    get "obedovat/show_menu", :to => "obedovat#show_menu"
+    post "obedovat/eat", :to => "obedovat#eat"
   end
 
   devise_for :users

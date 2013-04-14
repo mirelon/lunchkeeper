@@ -1,2 +1,8 @@
-%h1 Obedovat#eat
-%p Find me in app/views/obedovat/eat.html.haml
+Added:
+%br
+- @added.each do |entry|
+  = entry.label
+  %br
+= link_to t('.add_more', :default => t("helpers.links.Add more")), keeper_obedovat_show_menu_path(url: "Restauracia_849_Salon_Yukon"), :class => 'btn btn-primary'
+= link_to t('.list_all', :default => t("helpers.links.List all")), keeper_entries_path(@keeper), :class => 'btn btn-info'
+= link_to t('.graphs', :default => t("helpers.links.Graphs")), keeper_graphs_path(@keeper), :class => 'btn btn-inverse'

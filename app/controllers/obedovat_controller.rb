@@ -2,7 +2,6 @@ class ObedovatController < ApplicationController
   require 'open-uri'
 
   def show_menu
-    puts params.inspect
     n = Nokogiri::HTML(open('http://obedovat.sk/' + params[:url]))
     menu = n.css('.texthelp')[2]
     menu.search('strong').remove
@@ -21,5 +20,20 @@ class ObedovatController < ApplicationController
   end
 
   def eat
+    @keeper = Keeper.find(params[:keeper_id])
+    json = JSON.parse params[:json]
+    @added = []
+    json.each do |item|
+      puts item.inspect
+      entry = Entry.new
+      entry[:keeper_id] = @keeper.id
+      entry[:count] = 1
+      entry[:description] = item["description"]
+      entry[:code] = item["code"]
+      entry[:date] = DateTime.current
+      entry[:preselected] = false
+      entry.save
+      @added << entry
+    end
   end
 end

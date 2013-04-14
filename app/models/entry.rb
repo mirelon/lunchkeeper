@@ -14,4 +14,25 @@ class Entry < ActiveRecord::Base
     preselected
   end
 
+  def label
+    l = ""
+    if description.present?
+      l = "#{description}"
+    end
+
+    if l.present? and code.present?
+      l = "#{code} (#{l})"
+    elsif code.present?
+      l = code
+    end
+
+    if l.present? and count.present? and count != 1
+      l = "#{count} #{l}"
+    elsif l.empty?
+      l = count.to_s
+    end
+
+    l
+  end
+
 end

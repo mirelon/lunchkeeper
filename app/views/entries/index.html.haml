@@ -21,5 +21,6 @@
           = link_to t('.destroy', :default => t("helpers.links.destroy")), keeper_entry_path(@keeper, entry), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
 = link_to t('.new', :default => t("helpers.links.new_entry")), new_keeper_entry_path, :class => 'btn btn-primary'
+= link_to t('.yukon', :default => t("helpers.links.Yukon")), keeper_obedovat_show_menu_path(url: "Restauracia_849_Salon_Yukon"), :class => 'btn btn-primary'
 = render "entries/quick_add"
   
