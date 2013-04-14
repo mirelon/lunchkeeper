@@ -31,4 +31,22 @@ class GraphsController < ApplicationController
     gon.title = keeper.name
   end
 
+  def stringstats
+    keeper = Keeper.find(params[:keeper_id])
+    @counts = Hash.new(0)
+
+    keeper.entries.each do |e|
+      if e.description
+        UnicodeUtils.each_word(e.description) do |w|
+          pure = w.remove_non_alpha
+          pure = UnicodeUtils.downcase(pure)
+          if pure.length > 1
+            @counts [ pure ] += 1
+          end
+        end
+      end
+    end
+
+  end
+
 end

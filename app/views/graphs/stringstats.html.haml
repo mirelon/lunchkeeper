@@ -1,0 +1,9 @@
+= link_to "Cumulative", keeper_cumulative_graph_path, class: 'btn btn-inverse'
+= link_to "Pie", keeper_pie_chart_path, class: 'btn btn-inverse'
+%br
+%br
+%table{border: 1}
+  - @counts.each do |k,v|
+    %tr
+      %td= k
+      %td= v
