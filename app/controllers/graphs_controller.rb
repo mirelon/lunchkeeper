@@ -23,7 +23,9 @@ class GraphsController < ApplicationController
     gon.data = []
 
     keeper.entries.count(group: 'code').each do |key, count|
-      gon.data << {name: key, y: count}
+      if key.present?
+        gon.data << {name: key, y: count}
+      end
     end
 
     gon.title = keeper.name

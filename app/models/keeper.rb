@@ -4,11 +4,11 @@ class Keeper < ActiveRecord::Base
   attr_accessible :name
 
   def entries_from
-    entries.order('date ASC').first.date
+    entries.where(preselected: false).order('date ASC').first.date
   end
 
   def entries_to
-    entries.order('date DESC').first.date
+    entries.where(preselected: false).order('date DESC').first.date
   end
 
 end
