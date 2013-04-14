@@ -22,7 +22,7 @@ class GraphsController < ApplicationController
     
     gon.data = []
 
-    keeper.entries.count(group: 'code').each do |key, count|
+    keeper.entries.order('code').count(group: 'code').each do |key, count|
       if key.present?
         gon.data << {name: key, y: count}
       end
