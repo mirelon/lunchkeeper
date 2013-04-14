@@ -42,7 +42,9 @@ class GraphsController < ApplicationController
         pure = UnicodeUtils.downcase(pure)
         (0..pure.length-1).each do |i|
           (i..pure.length-1).each do |j|
-            @counts [ pure[i..j] ] += 1
+            if pure[i..j].is_ok_for_stats
+              @counts [ pure[i..j] ] += 1
+            end
           end
         end
       end
