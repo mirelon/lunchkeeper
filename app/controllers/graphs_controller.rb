@@ -37,17 +37,18 @@ class GraphsController < ApplicationController
 
     keeper.entries.each do |e|
       if e.description
-        UnicodeUtils.each_word(e.description) do |w|
-          pure = w.remove_non_alpha
-          pure = UnicodeUtils.downcase(pure)
-          if pure.length > 1
-            @counts [ pure ] += 1
+        pure = e.description
+        # pure = e.description.remove_non_alpha
+        pure = UnicodeUtils.downcase(pure)
+        (0..pure.length-1).each do |i|
+          (i..pure.length-1).each do |j|
+            @counts [ pure[i..j] ] += 1
           end
         end
       end
     end
 
-    @counts = @counts.sort_by{|k| k.first.length*k.last}.reverse
+    @counts = @counts.sort_by{|k| k.first.length*k.last*k.last}.reverse.first(2000)
 
   end
 
