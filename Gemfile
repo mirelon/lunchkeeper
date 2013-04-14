@@ -28,6 +28,9 @@ gem 'jquery-rails'
 gem 'gon'
 gem 'highcharts-rails'
 
+# For fetching and parsing remote sites
+gem 'nokogiri'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

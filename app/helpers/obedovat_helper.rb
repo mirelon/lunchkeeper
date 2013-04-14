@@ -1,0 +1,2 @@
+module ObedovatHelper
+end

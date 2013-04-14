@@ -1,0 +1,9 @@
+= form_tag "/eat", id: "obedovat_form"
+- @items.each_with_index do |item,i|
+  = hidden_field_tag "description_#{i}",item[:description]
+  = hidden_field_tag "code_#{i}",item[:code]
+  = check_box_tag i
+  = label_tag i, item[:label]
+  %br
+%br
+= submit_tag "Submit", class: ["btn","btn-info"]

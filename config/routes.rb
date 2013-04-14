@@ -1,5 +1,9 @@
 Lunchkeeper::Application.routes.draw do
 
+  get "obedovat/show_menu"
+
+  get "obedovat/eat"
+
   resources :keepers do
     resources :entries
     get 'preselected', :to => "entries#index", :preselected => true, :as => "preselected"
