@@ -33,24 +33,32 @@ class GraphsController < ApplicationController
 
   def stringstats
     keeper = Keeper.find(params[:keeper_id])
-    @counts = Hash.new(0)
+    @substring_counts = Hash.new(0)
+    @word_counts = Hash.new(0)
 
     keeper.entries.each do |e|
       if e.description
-        pure = e.description
-        # pure = e.description.remove_non_alpha
-        pure = UnicodeUtils.downcase(pure)
+        pure = UnicodeUtils.downcase(e.description)
+
         (0..pure.length-1).each do |i|
           (i..pure.length-1).each do |j|
             if pure[i..j].is_ok_for_stats
-              @counts [ pure[i..j] ] += 1
+              @substring_counts [ pure[i..j] ] += 1
             end
           end
         end
+
+        UnicodeUtils.each_word(pure) do |w|
+          if w.is_ok_for_stats
+            @word_counts[w] += 1
+          end
+        end
+
       end
     end
 
-    @counts = @counts.sort_by{|k| k.first.length*k.last*k.last}.reverse.first(2000)
+    @substring_counts = @substring_counts.sort_by{|k| k.first.length*k.last*k.last}.reverse.first(1000)
+    @word_counts = @word_counts.sort_by{|k| k.last}.reverse.first(1000)
 
   end
 
