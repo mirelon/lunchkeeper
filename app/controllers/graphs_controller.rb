@@ -47,6 +47,8 @@ class GraphsController < ApplicationController
       end
     end
 
+    @counts = @counts.sort_by(&:last).reverse
+
   end
 
 end

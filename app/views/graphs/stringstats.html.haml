@@ -4,7 +4,7 @@
 %br
 %br
 %table{border: 1}
-  - @counts.each do |k,v|
+  - @counts.each do |k|
     %tr
-      %td= k
-      %td= v
+      %td= k[0]
+      %td= k[1]
