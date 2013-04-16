@@ -6,9 +6,13 @@ class ObedovatController < ApplicationController
     menu = n.css('.texthelp')[2]
     menu.search('strong').remove
     @items = menu.text.split("\r\n")
+    puts @items.size
     @items.delete ""
+    puts @items.size
     @items = @items.map(&:strip_price)
+    puts @items.size
     @items = @items.map(&:strip)
+    puts @items.size
     @items = @items.map do |i|
       parts = i.split(":",2)
       if parts[1].present? and parts[0].length == 1
@@ -17,6 +21,7 @@ class ObedovatController < ApplicationController
         { code: nil, description: i, label: i }
       end
     end
+    puts @items.size
   end
 
   def eat
