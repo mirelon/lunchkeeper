@@ -13,15 +13,21 @@ class ObedovatController < ApplicationController
     @items = []
     polievky = true
     accumulator = ""
+    in_main_dish = false # som medzi "A: ... euro"
     menu.text.split("\r\n").each do |item|
-      accumulator << item
-      if (item =~ /\s*[A-Z]\s*:.*/).present?
+      if (item =~ /\s*[A-Z]\s*:.*/).present? # zacina A:
         polievky = false
+        in_main_dish = true
       end
-      if polievky or (item =~ /€\s*$/).present?
+      if polievky or in_main_dish # ak nie som v polievkach ani medzi "A: ... euro", je to nejaky inner text co treba ignorovat
+        accumulator << item
+      end
+      if polievky or (item =~ /€\s*$/).present? # konci znakom euro
         @items << accumulator
         accumulator = ""
+        in_main_dish = false
       end
+
     end
     @items.delete ""
     @items = @items.map(&:strip_price)
